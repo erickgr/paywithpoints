@@ -32,7 +32,7 @@ public class PayPointsController {
 		
 	}
 	
-	@RequestMapping(value="/rewards/enablement", method=RequestMethod.PUT,produces = "application/json")
+	@RequestMapping(value="/rewards/enablement", method=RequestMethod.PUT,produces = "application/json", consumes = "application/json" )
 	public ResponseEntity<?> updatePayPoints(
 			@RequestBody String enablementRequest, 
 			@RequestHeader("countryCode") String countryCode,
@@ -46,7 +46,7 @@ public class PayPointsController {
 		
 	}
 	
-	@RequestMapping(value="/rewards/linkage", method=RequestMethod.POST,produces = "application/json")
+	@RequestMapping(value="/rewards/linkage", method=RequestMethod.POST,produces = "application/json", consumes = "application/json")
 	public ResponseEntity<?> createLinkCode(
 			@RequestBody String linkageRequest,
 			@RequestHeader("countryCode") String countryCode,
@@ -79,7 +79,7 @@ public class PayPointsController {
 	}
 	
 	
-	@RequestMapping(value="/rewards/redemption", method=RequestMethod.POST,produces = "application/json")
+	@RequestMapping(value="/rewards/redemption", method=RequestMethod.POST,produces = "application/json", consumes = "application/json")
 	public ResponseEntity<?> redeemReward(
 			@RequestBody String redemptionRequest,
 			@RequestHeader("countryCode") String countryCode,

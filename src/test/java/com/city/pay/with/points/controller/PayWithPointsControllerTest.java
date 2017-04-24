@@ -10,7 +10,7 @@ import com.citibanamex.api.pay.with.points.controller.PayPointsController;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = PayPointsController.class)
-@ComponentScan("com.citibanamex.api.accounts")
+@ComponentScan("com.citibanamex.api.paypoints")
 public class PayWithPointsControllerTest {
 
 }
