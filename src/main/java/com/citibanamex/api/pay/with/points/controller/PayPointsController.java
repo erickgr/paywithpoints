@@ -1,4 +1,4 @@
-package com.citibanamex.api.controller;
+package com.citibanamex.api.pay.with.points.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

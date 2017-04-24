@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CitibanamexApiPayWithPointsApplication {
+public class PayWithPointsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CitibanamexApiPayWithPointsApplication.class, args);
+		SpringApplication.run(PayWithPointsApplication.class, args);
 	}
 }
