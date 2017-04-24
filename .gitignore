@@ -77,8 +77,7 @@ nbdist/
 .#*
 *#
 *~
-pom.xml.versionsBackup
-credentials.yml
+
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
