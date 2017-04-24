@@ -26,6 +26,7 @@ public class PayPointsController {
 			@RequestHeader("Accept") String Accept,
 			@RequestHeader("client_id") String client_id
 			){
+		
 		//String result = serviceimpl.checkRewardsEligibility(cloakedCard);
 		return new ResponseEntity<>(result,HttpStatus.OK);
 		
