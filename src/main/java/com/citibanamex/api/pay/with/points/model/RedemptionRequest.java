@@ -1,4 +1,4 @@
-package com.citibanamex.api.model;
+package com.citibanamex.api.pay.with.points.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
