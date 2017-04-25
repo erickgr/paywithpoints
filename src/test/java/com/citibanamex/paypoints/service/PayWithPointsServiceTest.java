@@ -1,4 +1,4 @@
-package com.city.paypoints.service;
+package com.citibanamex.paypoints.service;
 
 public class PayWithPointsServiceTest {
 

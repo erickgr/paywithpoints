@@ -28,8 +28,8 @@ public class PayPointsController {
 			){
 		
 		//String result = serviceimpl.checkRewardsEligibility(cloakedCard);
-//		return new ResponseEntity<>(result,HttpStatus.OK);
-		return null;
+		return new ResponseEntity<>(HttpStatus.OK);
+//		return null;
 		
 	}
 	
@@ -94,5 +94,7 @@ public class PayPointsController {
 		
 	}
 
+
 }
+
 
