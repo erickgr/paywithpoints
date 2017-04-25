@@ -2,6 +2,7 @@ package com.citibanamex.api.paypoints.serviceImpl;
 
 import org.springframework.stereotype.Service;
 
+import com.citibanamex.api.paypoints.model.EnablementRequest;
 import com.citibanamex.api.paypoints.model.IsEligible;
 import com.citibanamex.api.paypoints.model.LinkStatus;
 import com.citibanamex.api.paypoints.model.PointBalance;
@@ -32,10 +33,17 @@ public class PayPointServiceImpl implements PayPointService {
 		
 		return ok;
 	}
-
+/*
+ * There is no back end an we mock the process here.
+ * 
+ */
 	@Override
-	public void updatePayPoints() {
-		// TODO Auto-generated method stub
+	public void updatePayPoints(EnablementRequest enablementRequest) {
+		System.out.println("1.-"+enablementRequest.getCloakedCreditCardNumber());
+		System.out.println("1.-"+enablementRequest.getMerchantCode());
+		System.out.println("1.-"+enablementRequest.getRewardLinkCode());
+		System.out.println("1.-"+enablementRequest.getRewardProgram());
+		enablementRequest.setEnableProgramIndicator(false);
 		
 	}
 
