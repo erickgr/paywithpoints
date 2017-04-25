@@ -8,7 +8,25 @@ import com.citibanamex.api.paypoints.model.RedemptionOrderSummary;
 public class PayPointServiceImpl {
 
 	public IsEligible checkRewards(String cloakedCard) {
-		return null;
+		
+		IsEligible ok= new IsEligible();
+		
+		if(cloakedCard.equals("sha-11")){
+			ok.setEligibilityIndicator("E");
+			return ok;
+		}
+		
+		if(cloakedCard.equals("sha-12")){
+			ok.setEligibilityIndicator("Y");
+			return ok;
+		}
+		
+		if(cloakedCard.equals("sha-13")){
+			ok.setEligibilityIndicator("N");
+			return ok;
+		}
+		
+		return ok;
 	}
 
 	public void updatePayPoints() {
