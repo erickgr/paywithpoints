@@ -39,6 +39,8 @@ public class PayPointsController {
 			){
 		
 		IsEligible isEligible = paypointservice.checkRewards(cloakedCard);
+		System.out.println(isEligible.getEligibilityIndicator());
+		
 		//String result = serviceimpl.checkRewardsEligibility(cloakedCard);
 		return new ResponseEntity<>(isEligible,HttpStatus.OK);
 //		return null;
