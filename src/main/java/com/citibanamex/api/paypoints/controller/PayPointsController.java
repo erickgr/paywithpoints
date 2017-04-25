@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.citibanamex.api.paypoints.model.EnablementRequest;
+import com.citibanamex.api.paypoints.model.LinkageRequest;
+import com.citibanamex.api.paypoints.model.RedemptionRequest;
+
 @RestController
 @RequestMapping("/v1")
 public class PayPointsController {
@@ -28,14 +32,14 @@ public class PayPointsController {
 			){
 		
 		//String result = serviceimpl.checkRewardsEligibility(cloakedCard);
-		return new ResponseEntity<>(HttpStatus.OK);
-//		return null;
+//		return new ResponseEntity<>(result,HttpStatus.OK);
+		return null;
 		
 	}
 	
 	@RequestMapping(value="/rewards/enablement", method=RequestMethod.PUT,produces = "application/json")
 	public ResponseEntity<?> updatePayPoints(
-			@RequestBody String enablementRequest, 
+			@RequestBody EnablementRequest enablementRequest, 
 			@RequestHeader("countryCode") String countryCode,
 			@RequestHeader(value="businessCode",required=false) String businessCode ,
 			@RequestHeader("Authorization") String Authorization ,
@@ -49,7 +53,7 @@ public class PayPointsController {
 	
 	@RequestMapping(value="/rewards/linkage", method=RequestMethod.POST,produces = "application/json")
 	public ResponseEntity<?> createLinkCode(
-			@RequestBody String linkageRequest,
+			@RequestBody LinkageRequest linkageRequest,
 			@RequestHeader("countryCode") String countryCode,
 			@RequestHeader(value="businessCode",required=false) String businessCode ,
 			@RequestHeader("Authorization") String Authorization ,
@@ -82,7 +86,7 @@ public class PayPointsController {
 	
 	@RequestMapping(value="/rewards/redemption", method=RequestMethod.POST,produces = "application/json")
 	public ResponseEntity<?> redeemReward(
-			@RequestBody String redemptionRequest,
+			@RequestBody RedemptionRequest redemptionRequest,
 			@RequestHeader("countryCode") String countryCode,
 			@RequestHeader(value="businessCode",required=false) String businessCode ,
 			@RequestHeader("Authorization") String Authorization ,
@@ -94,7 +98,5 @@ public class PayPointsController {
 		
 	}
 
-
 }
-
 
