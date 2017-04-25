@@ -16,6 +16,7 @@ import com.citibanamex.api.paypoints.model.IsEligible;
 import com.citibanamex.api.paypoints.model.LinkageRequest;
 import com.citibanamex.api.paypoints.model.RedemptionRequest;
 import com.citibanamex.api.paypoints.service.PayPointService;
+import com.citibanamex.paypoints.service.PayWithPointsServiceTest;
 
 
 @RestController
@@ -57,7 +58,8 @@ public class PayPointsController {
 			@RequestHeader("Accept") String Accept,
 			@RequestHeader("client_id") String client_id
 			){
-				return null;
+		paypointservice.updatePayPoints(enablementRequest);
+		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}
 	
