@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"isRedemptionEligible","availablePointBalance","programConversionRate","localCurrencyCode","redemptionPointIncrement","maximumPointsToRedeem","minimumPointsToRedeem"})
-public class pointBalance {
+public class PointBalance {
 	
 	@JsonProperty("isRedemptionEligible")
 	private boolean isRedemptionEligible;
@@ -30,7 +30,7 @@ public class pointBalance {
 	private Integer minimumPointsToRedeem;
 	
 	
-	public pointBalance(){}
+	public PointBalance(){}
 
 
 	public boolean isRedemptionEligible() {
