@@ -1,5 +1,6 @@
 package com.citibanamex.api.paypoints.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +15,15 @@ import com.citibanamex.api.paypoints.model.EnablementRequest;
 import com.citibanamex.api.paypoints.model.IsEligible;
 import com.citibanamex.api.paypoints.model.LinkageRequest;
 import com.citibanamex.api.paypoints.model.RedemptionRequest;
+import com.citibanamex.api.paypoints.service.PayPointService;
+
 
 @RestController
 @RequestMapping("/v1")
 public class PayPointsController {
+	
+	@Autowired
+	private PayPointService paypointservice;
 	
 	@RequestMapping(value="/rewards/{cloakedCreditCardNumber}/eligibility", method=RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<?> checkRewards(
@@ -31,8 +37,8 @@ public class PayPointsController {
 			@RequestHeader("Accept") String Accept,
 			@RequestHeader("client_id") String client_id
 			){
-		IsEligible isEligible = new IsEligible();
-		isEligible.setEligibilityIndicator("E");
+		
+		IsEligible isEligible = paypointservice.checkRewards(cloakedCard);
 		//String result = serviceimpl.checkRewardsEligibility(cloakedCard);
 		return new ResponseEntity<>(isEligible,HttpStatus.OK);
 //		return null;
