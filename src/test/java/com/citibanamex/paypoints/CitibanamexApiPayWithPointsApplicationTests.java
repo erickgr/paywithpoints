@@ -43,6 +43,7 @@ public class CitibanamexApiPayWithPointsApplicationTests {
 		String cloakedCreditCardNumber = "sha-11";
 		String rewardProgram ="dont know", merchantCode="23422";
 		String Authorization ="true" ;
+		
 		String uuid = "2342d";
 		String Accept = "application/json";
 		String client_id = "2342";
