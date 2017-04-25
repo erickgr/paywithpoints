@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.citibanamex.api.paypoints.model.EnablementRequest;
+import com.citibanamex.api.paypoints.model.IsEligible;
 import com.citibanamex.api.paypoints.model.LinkageRequest;
 import com.citibanamex.api.paypoints.model.RedemptionRequest;
 
@@ -30,10 +31,11 @@ public class PayPointsController {
 			@RequestHeader("Accept") String Accept,
 			@RequestHeader("client_id") String client_id
 			){
-		
+		IsEligible isEligible = new IsEligible();
+		isEligible.setEligibilityIndicator("E");
 		//String result = serviceimpl.checkRewardsEligibility(cloakedCard);
-//		return new ResponseEntity<>(result,HttpStatus.OK);
-		return null;
+		return new ResponseEntity<>(isEligible,HttpStatus.OK);
+//		return null;
 		
 	}
 	

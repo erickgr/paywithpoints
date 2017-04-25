@@ -1,6 +1,9 @@
 package com.citibanamex.api.paypoints.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -11,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 
 
@@ -33,7 +37,15 @@ public class PayWithPointsControllerTest {
 	@Test
 	public void testGetNearByAtmsStatus() throws Exception {
 		String cloakedCreditCardNumber = "safsaf";
-		mockMvc.perform(get("/v1/rewards/{cloakedCreditCardNumber}/eligibility",cloakedCreditCardNumber).contentType(MediaType.APPLICATION_JSON));
+		String rewardProgram ="dont know", merchantCode="23422";
+		String Authorization ="true" ;
+		 String uuid = "2342d";
+		 String Accept = "dsfa";
+		 String client_id = "2342";
+		String countryCode = "mex";
+		mockMvc.perform(get("/v1/rewards/safsaf/eligibility").param("rewardProgram", rewardProgram)
+				.param("merchantCode", merchantCode).header("Authorization", Authorization).header("uuid", uuid)
+				.header("Accept", Accept).header("client_id", client_id).header("countryCode", countryCode));
 		
 //		mockMvc.perform(get("/v1/rewards/{cloakedCreditCardNumber}/eligibility}")
 //						.accept(MediaType.APPLICATION_JSON))
