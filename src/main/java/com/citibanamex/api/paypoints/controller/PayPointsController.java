@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1")
 public class PayPointsController {
 	
-	@RequestMapping(value="/rewards/{cloakedCreditCardNumber}/eligibility}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/rewards/{cloakedCreditCardNumber}/eligibility", method=RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<?> checkRewards(
 			@PathVariable("cloakedCreditCardNumber") String cloakedCard, 
 			@RequestParam("rewardProgram") String rewardProgram,  
