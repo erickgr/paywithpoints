@@ -57,7 +57,15 @@ public class PayPointServiceImpl implements PayPointService {
 	@Override
 	public PointBalance retrieveRewards() {
 		// TODO Auto-generated method stub
-		return null;
+		PointBalance balance = new  PointBalance();
+		balance.setAvailablePointBalance(100);
+		balance.setLocalCurrencyCode("MXN");
+		balance.setMaximumPointsToRedeem(20);
+		balance.setMinimumPointsToRedeem(30);
+		balance.setProgramConversionRate(23);
+		balance.setRedemptionEligible(true);
+		balance.setRedemptionPointIncrement(15);
+		return balance;
 	}
 
 	@Override
