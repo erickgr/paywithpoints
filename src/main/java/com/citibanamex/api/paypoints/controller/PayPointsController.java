@@ -19,7 +19,6 @@ import com.citibanamex.api.paypoints.model.PointBalance;
 import com.citibanamex.api.paypoints.model.RedemptionOrderSummary;
 import com.citibanamex.api.paypoints.model.RedemptionRequest;
 import com.citibanamex.api.paypoints.service.PayPointService;
-import com.citibanamex.paypoints.service.PayWithPointsServiceTest;
 
 @RestController
 @RequestMapping("/v1")
