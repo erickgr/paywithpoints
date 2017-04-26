@@ -49,8 +49,9 @@ public class PayPointServiceImpl implements PayPointService {
 	}
 	@Override
 	public LinkStatus createLinkCode(LinkageRequest linkageRequest) {
-		// TODO Auto-generated method stub
-		return null;
+		LinkStatus obj = new LinkStatus();
+		obj.setRewardLinkCode(":D");
+		return obj;
 	}
 
 	@Override

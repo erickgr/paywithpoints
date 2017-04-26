@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.citibanamex.api.paypoints.PayWithPointsApplication;
@@ -77,7 +78,28 @@ public class CitibanamexApiPayWithPointsApplicationTests {
 		System.out.println("Estatus de elegibilidad: " + eligible.getEligibilityIndicator());
 
 	}
-
+	@Test
+	public void retrieveRewards() throws Exception{
+		String cloakedCreditCardNumber="cloaked";
+		String countryCode="country";
+		String rewardProgram="reward";
+		String rewardLinkCode="rewardLink";
+		String merchantCode="merchant";
+		String businessCode="bussiness" ;
+		String Authorization="auth";
+		String uuid="uuid";
+		String Accept="application/json";
+		String client_id="client";
+		
+		mockMvc.perform(get("/v1/rewards/pointBalance")
+				.param("cloakedCreditCardNumber", cloakedCreditCardNumber).param("rewardProgram", rewardProgram)
+				.param("rewardLinkCode", rewardLinkCode).param("merchantCode", merchantCode)
+				.header("countryCode", countryCode).header("businessCode", businessCode).header("Authorization", Authorization)
+				.header("uuid", uuid).header("Accept", Accept).header("client_id", client_id)).andExpect(status().isOk())
+				.andDo(print());
+		
+	}
+	@Ignore
 	@Test
 	public void createLinkCode() throws Exception {
 

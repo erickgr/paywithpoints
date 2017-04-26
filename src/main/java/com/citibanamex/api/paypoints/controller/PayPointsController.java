@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.citibanamex.api.paypoints.model.EnablementRequest;
 import com.citibanamex.api.paypoints.model.IsEligible;
+import com.citibanamex.api.paypoints.model.LinkStatus;
 import com.citibanamex.api.paypoints.model.LinkageRequest;
 import com.citibanamex.api.paypoints.model.RedemptionRequest;
 import com.citibanamex.api.paypoints.service.PayPointService;
@@ -74,8 +75,8 @@ public class PayPointsController {
 			@RequestHeader("client_id") String client_id
 			
 			){
-				paypointservice.createLinkCode(linkageRequest);
-				return new ResponseEntity<>(HttpStatus.OK);
+				LinkStatus link= paypointservice.createLinkCode(linkageRequest);
+				return new ResponseEntity<>(link,HttpStatus.OK);
 		
 	}
 	
