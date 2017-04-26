@@ -2,6 +2,7 @@ package com.citibanamex.api.paypoints.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -29,6 +30,10 @@ import org.springframework.web.context.WebApplicationContext;
 import com.citibanamex.api.paypoints.PayWithPointsApplication;
 import com.citibanamex.api.paypoints.model.EnablementRequest;
 import com.citibanamex.api.paypoints.model.IsEligible;
+import com.citibanamex.api.paypoints.model.LinkStatus;
+import com.citibanamex.api.paypoints.model.LinkageRequest;
+import com.citibanamex.api.paypoints.model.PointBalance;
+import com.citibanamex.api.paypoints.model.RedemptionOrderSummary;
 import com.citibanamex.api.paypoints.service.PayPointService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,6 +51,12 @@ public class PayWithPointsControllerTest {
 	private IsEligible eligible;
 	
 	private EnablementRequest enablementRequest;
+	
+	private PointBalance pointBalance;
+	
+	private RedemptionOrderSummary redemptionOrderSummary;
+	
+	private LinkStatus linkStatus;
 	
 	@MockBean
 	private PayPointService payPointService;
@@ -66,6 +77,24 @@ public class PayWithPointsControllerTest {
 		enablementRequest.setMerchantCode("merchant");
 		enablementRequest.setRewardLinkCode("link");
 		enablementRequest.setRewardProgram("rewardOro");
+		
+		pointBalance = new  PointBalance();
+		pointBalance.setAvailablePointBalance(100);
+		pointBalance.setLocalCurrencyCode("MXN");
+		pointBalance.setMaximumPointsToRedeem(20);
+		pointBalance.setMinimumPointsToRedeem(30);
+		pointBalance.setProgramConversionRate(23);
+		pointBalance.setRedemptionEligible(true);
+		pointBalance.setRedemptionPointIncrement(15);
+		
+		linkStatus = new LinkStatus();
+		linkStatus.setRewardLinkCode(":D");
+		
+		redemptionOrderSummary = new RedemptionOrderSummary();
+		redemptionOrderSummary.setAvailablePointBalance(100);
+		redemptionOrderSummary.setOrderID("ABI1");
+		
+		
 	}
 	@Ignore
 	@Test
@@ -85,7 +114,7 @@ public class PayWithPointsControllerTest {
 		        .andExpect(status().isOk()).andDo(print());
 	}
 
-//	@Ignore
+	@Ignore
 	@Test
 	public void testUpadadteRewards()throws Exception {
 		EnablementRequest enablementRequest = new EnablementRequest();
@@ -105,5 +134,54 @@ public class PayWithPointsControllerTest {
 				.header("countryCode", countryCode).header("businessCode", businessCode)
 				.header("Authorization", Authorization).header("uuid", uuid).header("Accept", Accept).header("client_id", client_id))
 		        .andExpect(status().isOk()).andDo(print());
+	}
+	
+	
+	@Ignore
+	@Test
+	public void retrieveRewards()throws Exception {
+		String cloakedCreditCardNumber="cloaked";
+		String countryCode="country";
+		String rewardProgram="reward";
+		String rewardLinkCode="rewardLink";
+		String merchantCode="merchant";
+		String businessCode="bussiness" ;
+		String Authorization="auth";
+		String uuid="uuid";
+		String Accept="application/json";
+		String client_id="client";
+		when(payPointService.retrieveRewards()).thenReturn(pointBalance);
+		mockMvc.perform(get("/v1/rewards/pointBalance")
+				.param("cloakedCreditCardNumber", cloakedCreditCardNumber).param("rewardProgram", rewardProgram)
+				.param("rewardLinkCode", rewardLinkCode).param("merchantCode", merchantCode)
+				.header("countryCode", countryCode).header("businessCode", businessCode).header("Authorization", Authorization)
+				.header("uuid", uuid).header("Accept", Accept).header("client_id", client_id)).andExpect(status().isOk())
+				.andDo(print());
+		
+	}
+	
+	
+	@Test
+	public void createLinkCode() throws Exception {
+		LinkageRequest linkageRequest = new LinkageRequest();
+		linkageRequest.setBillingZipCode("billing");
+		linkageRequest.setCloakedCreditCardNumber("cloaked");
+		linkageRequest.setMerchantCode("merchant");
+		linkageRequest.setRewardProgram("reward");
+		String countryCode = "country";
+		String businessCode = "bussiness";
+		String Authorization = "auth";
+		String uuid = "uuid";
+		String Accept = "application/json";
+		String client_id = "client";
+
+		ObjectMapper obj = new ObjectMapper();
+		String json = obj.writeValueAsString(linkageRequest);
+		when(payPointService.createLinkCode(linkageRequest)).thenReturn(linkStatus);
+		mockMvc.perform(post("/v1/rewards/linkage").contentType(MediaType.APPLICATION_JSON).content(json)
+				.header("countryCode", countryCode).header("businessCode", businessCode)
+				.header("Authorization", Authorization).header("uuid", uuid).header("Accept", Accept)
+				.header("client_id", client_id)).andExpect(status().isOk()).andDo(print());
+		
 	}
 }
