@@ -71,7 +71,10 @@ public class PayPointServiceImpl implements PayPointService {
 	@Override
 	public RedemptionOrderSummary redeemReward() {
 		// TODO Auto-generated method stub
-		return null;
+		RedemptionOrderSummary orderSummary = new RedemptionOrderSummary();
+		orderSummary.setAvailablePointBalance(100);
+		orderSummary.setOrderID("ABI1");
+		return orderSummary;
 	}
 
 }
