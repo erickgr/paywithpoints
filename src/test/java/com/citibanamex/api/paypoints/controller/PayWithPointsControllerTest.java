@@ -34,6 +34,7 @@ import com.citibanamex.api.paypoints.model.LinkStatus;
 import com.citibanamex.api.paypoints.model.LinkageRequest;
 import com.citibanamex.api.paypoints.model.PointBalance;
 import com.citibanamex.api.paypoints.model.RedemptionOrderSummary;
+import com.citibanamex.api.paypoints.model.RedemptionRequest;
 import com.citibanamex.api.paypoints.service.PayPointService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -160,7 +161,7 @@ public class PayWithPointsControllerTest {
 		
 	}
 	
-	
+	@Ignore
 	@Test
 	public void createLinkCode() throws Exception {
 		LinkageRequest linkageRequest = new LinkageRequest();
@@ -184,4 +185,31 @@ public class PayWithPointsControllerTest {
 				.header("client_id", client_id)).andExpect(status().isOk()).andDo(print());
 		
 	}
+	
+	
+	@Test
+	public void redeemReward() throws Exception{
+		RedemptionRequest redemption = new RedemptionRequest();
+		redemption.setCloakedCreditCardNumber("cloaked");
+		redemption.setMerchantCode("merchant");
+		redemption.setRewardLinkCode("reward");
+		redemption.setRewardProgram("program");
+		redemption.setTransactionReferenceNumber("transaction");
+		
+		String countryCode="Country";
+		String businessCode="bussines";
+		String Authorization="Auth";
+		String uuid="uuid";
+		String Accept="application/json";
+		String client_id="client";
+		
+		ObjectMapper obj = new ObjectMapper();
+		String json = obj.writeValueAsString(redemption);
+		when(payPointService.redeemReward()).thenReturn(redemptionOrderSummary);
+		mockMvc.perform(post("/v1/rewards/redemption").contentType(MediaType.APPLICATION_JSON).content(json)
+				.header("countryCode", countryCode).header("businessCode", businessCode)
+				.header("Authorization", Authorization).header("uuid", uuid).header("Accept", Accept)
+				.header("client_id", client_id)).andExpect(status().isOk()).andDo(print());
+	}
+	
 }
