@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.citibanamex.api.paypoints.model.EnablementRequest;
 import com.citibanamex.api.paypoints.model.IsEligible;
 import com.citibanamex.api.paypoints.model.LinkStatus;
+import com.citibanamex.api.paypoints.model.LinkageRequest;
 import com.citibanamex.api.paypoints.model.PointBalance;
 import com.citibanamex.api.paypoints.model.RedemptionOrderSummary;
 import com.citibanamex.api.paypoints.service.PayPointService;
@@ -46,9 +47,8 @@ public class PayPointServiceImpl implements PayPointService {
 		enablementRequest.setEnableProgramIndicator(false);
 		
 	}
-
 	@Override
-	public LinkStatus createLinkCode() {
+	public LinkStatus createLinkCode(LinkageRequest linkageRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}

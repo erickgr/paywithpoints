@@ -74,7 +74,8 @@ public class PayPointsController {
 			@RequestHeader("client_id") String client_id
 			
 			){
-				return null;
+				paypointservice.createLinkCode(linkageRequest);
+				return new ResponseEntity<>(HttpStatus.OK);
 		
 	}
 	
