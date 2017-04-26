@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.citibanamex.api.handler.exception.GlobalExceptionHandler;
+import com.citibanamex.api.model.exception.CustomException;
 import com.citibanamex.api.paypoints.model.EnablementRequest;
 import com.citibanamex.api.paypoints.model.IsEligible;
 import com.citibanamex.api.paypoints.model.LinkStatus;
@@ -24,6 +26,9 @@ import com.citibanamex.api.paypoints.service.PayPointService;
 @RequestMapping("/v1")
 public class PayPointsController {
 
+	private final String countryCodePattern = "([A-Z]){2}";
+	private final String businessCodePattern = "\\w{3,}";
+	
 	@Autowired
 	private PayPointService paypointservice;
 
@@ -33,10 +38,41 @@ public class PayPointsController {
 			@RequestHeader("countryCode") String countryCode,
 			@RequestHeader(value = "businessCode", required = false) String businessCode,
 			@RequestHeader("Authorization") String Authorization, @RequestHeader("uuid") String uuid,
-			@RequestHeader("Accept") String Accept, @RequestHeader("client_id") String client_id) {
+			@RequestHeader("Accept") String Accept, @RequestHeader("client_id") String client_id) throws Exception {
 
+		GlobalExceptionHandler exceptionHandler = new GlobalExceptionHandler();
+		
+		if(countryCode == null || countryCode == ""){
+			String message = "countryCodeBlank";
+			CustomException customException = new CustomException(message); 
+			return exceptionHandler.specialException(customException);
+		}
+		if(!countryCode.matches(countryCodePattern)){
+			String message = "not a valid country code";
+			CustomException customException = new CustomException(message); 
+			return exceptionHandler.specialException(customException);
+		}
+		
+		if(merchantCode == null || merchantCode == "" ){
+			String message = "merchantCodeBlank";
+			CustomException customException = new CustomException(message); 
+			return exceptionHandler.specialException(customException);
+		}
+		
+		if(merchantCode.length()>5){
+			String message = "merchantCodeLengthExceeded";
+			CustomException customException = new CustomException(message); 
+			return exceptionHandler.specialException(customException);	
+		}
+		
+		if(!businessCode.matches(businessCodePattern)){
+			String message = "Not a valid business code";
+			CustomException customException = new CustomException(message); 
+			return exceptionHandler.specialException(customException);	
+		} 
+		
 		IsEligible isEligible = paypointservice.checkRewards(cloakedCard);
-		System.out.println(isEligible.getEligibilityIndicator());
+		System.out.println("Elegibilidad: "+ isEligible.getEligibilityIndicator());
 
 		// String result = serviceimpl.checkRewardsEligibility(cloakedCard);
 		return new ResponseEntity<>(isEligible, HttpStatus.OK);
@@ -93,4 +129,5 @@ public class PayPointsController {
 
 	}
 
+	
 }
