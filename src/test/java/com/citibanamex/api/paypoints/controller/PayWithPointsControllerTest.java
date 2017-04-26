@@ -186,7 +186,7 @@ public class PayWithPointsControllerTest {
 		
 	}
 	
-	
+	@Ignore
 	@Test
 	public void redeemReward() throws Exception{
 		RedemptionRequest redemption = new RedemptionRequest();
